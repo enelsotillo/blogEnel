@@ -41,7 +41,7 @@ public class Blog {
         return id;
     }
 
-    public void setId(int blogId) {
+    public void setId(int id) {
         this.id = id;
     }
 

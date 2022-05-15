@@ -3,35 +3,57 @@ package com.enel.enel.apis;
 import com.enel.enel.domain.Blog;
 import com.enel.enel.domain.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins="http://localhost:3000")
-@RestController
-@RequestMapping("/blog")
+
+import java.util.List;
+import java.util.Optional;
+
+@CrossOrigin(origins="http://localhost:3000") // permiso. el unico que puede hacer peticiones el fromend
+@RestController // el tipo de peticion controlador
+@RequestMapping("/blog") // ruta de acceso
 public class BlogController {
     @Autowired // instancia
     private BlogService blogService; //servicios de blog
 
+    //consultar un solo blog
     @GetMapping("/")
-    public Blog optenerBlog(@RequestParam("id")  int id) {
-        Blog blog=this.blogService.optenerBlog(id);
-        return blog;
+    public ResponseEntity<Blog> optenerBlog(@RequestParam("id")  int id) {
+        Optional<Blog> blog=this.blogService.optenerBlog(id);
+        if(blog.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(blog.get(), HttpStatus.OK);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Blog>> consultarTodo(){
+        //consultar todos los blog con blogServicio
+        List<Blog> lista=this.blogService.todosBlog();
+        // retornar la lista de blog
+        return new ResponseEntity<List<Blog>>(lista, HttpStatus.OK);
+    }
+    //crear blog
+    // @RequestBody indica a la derecha
+    @PostMapping("/")
+    public ResponseEntity <Blog> crearBlog(@RequestBody() Blog blog)  {
+       Blog repuesta=this.blogService.guardarBlog(blog);
+        return new ResponseEntity<>(blog, HttpStatus.CREATED);
+        //}else {
+           // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        //}
+    }
+    //actualizar blog
+    @PutMapping("/")
+    public ResponseEntity<Blog> actualizaBlog(@RequestBody() Blog blog){
+       Blog actualizadoBlog = this.blogService.actualizarBlog(blog);
+       return new ResponseEntity<>(actualizadoBlog, HttpStatus.OK);
     }
 
-    @PostMapping("/")
-    public String crearBlog(@RequestBody() Blog blog)  {
-       boolean repuesta=this.blogService.guardarBlog(blog);
-        if(repuesta==true){
-            return "Guardado";
-        }else {
-            return "no se guardo";
-        }
-    }
-    @PutMapping("/")
-    public String actualizaBlog(){
-        return "Blog actualizado";
-    }
+    //eliminar blog
     @DeleteMapping("/")
-    public String eliminaBlog(){
-        return "Blog eliminado";
+    public ResponseEntity<String> eliminaBlog(@RequestParam("id")  int id){
+        this.blogService.eliminarBlog(id);
+        return new ResponseEntity<>("Eliminado Blog "+id, HttpStatus.OK);
     }
 }

@@ -8,15 +8,16 @@ public class BlogEntity {
     @Id //representa la llave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blog_id")
-    private int blogId;
+    private Integer blogId;
     private String titulo;
     private String contenido;
     private String autor;
 
-    public BlogEntity(String titulo, String autor, String contenido, int blogId) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.contenido = contenido;
+    public Integer getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Integer blogId) {
         this.blogId = blogId;
     }
 
@@ -28,14 +29,6 @@ public class BlogEntity {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
     public String getContenido() {
         return contenido;
     }
@@ -44,12 +37,11 @@ public class BlogEntity {
         this.contenido = contenido;
     }
 
-    public int getId() {
-        return blogId;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setId(int blogId) {
-        this.blogId = blogId;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
-
 }

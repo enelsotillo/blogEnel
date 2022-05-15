@@ -4,9 +4,10 @@ import com.enel.enel.domain.Blog;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring") // es un componente de spring
+import java.util.List;
+
+@Mapper(componentModel = "spring") // es un component de spring
 public interface BlogMapper {
 
     // para crear una lista de Mapping
@@ -16,11 +17,12 @@ public interface BlogMapper {
     //})
     @Mapping(source = "id", target = "blogId") // cambia DNI a Cedula cambia la propiedad
     BlogEntity convertirBlogABlogEntity(Blog blog);
-    //@Mapping(source = "blogId", target = "id")
 
-    //@Mapping(target = "propiedad que no tiene blogEntity", ignore = true);
-    //@InheritInverseConfiguration
-   // Blog convertirBlogEntityABlog(BlogEntity blogEntity);
+    //@Mapping(target = "propiedad que no tiene blogEntity", ignore = true)
+    @Mapping(source = "blogId", target = "id")
+    @InheritInverseConfiguration
+    Blog convertirBlogEntityABlog(BlogEntity blogEntity);
 
+    List<Blog> convertirAListaBlog(List<BlogEntity> lista);
 }
 
