@@ -22,7 +22,7 @@ public interface UserMapper {
     UserEntity convertirUserAUserEntity(User user);
 
     //@Mapping(target = "propiedad que no tiene blogEntity", ignore = true)
-    @Mapping(source = "idUser", target = "idUser")
+    @Mapping(source = "idUser", target = "id")
     @InheritInverseConfiguration
     User convertirUserEntityAUser(UserEntity userEntity);
 

@@ -1,4 +1,4 @@
-package com.enel.enel.apis;
+package com.enel.enel.apis.controller;
 
 import com.enel.enel.domain.Blog;
 import com.enel.enel.domain.BlogService;
