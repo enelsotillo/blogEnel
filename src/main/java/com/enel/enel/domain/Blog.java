@@ -5,12 +5,22 @@ public class Blog {
     private String titulo;
     private String contenido;
     private String autor;
+    private String categoria;
 
-    public Blog(String titulo, String autor, String contenido, int id) {
+    public Blog(String titulo, String autor, String contenido, int id, String categoria) {
         this.titulo = titulo;
         this.autor = autor;
         this.contenido = contenido;
         this.id = id;
+        this.categoria=categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getTitulo() {

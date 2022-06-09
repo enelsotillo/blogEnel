@@ -27,10 +27,10 @@ public class UserController {
         }
         return new ResponseEntity<>(user.get(), HttpStatus.OK);
     }
-// crear un nuevo usuario
-   // @PostMapping("/")
-   // public ResponseEntity <User> crearUser(@RequestBody() User user){
-   //     User repuesta=this.userService.guardarUser(user);
-     //   return new ResponseEntity<>(user, HttpStatus.CREATED);
-    //}
+//crear un nuevo usuario
+    @PostMapping("/")
+    public ResponseEntity <User> crearUser(@RequestBody() User user){
+        User repuesta=this.userService.guardarUser(user);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
 }

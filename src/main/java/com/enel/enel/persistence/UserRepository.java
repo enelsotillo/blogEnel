@@ -21,6 +21,10 @@ public class UserRepository {
         }
 
         return Optional.of(this.userMapper.convertirUserEntityAUser(entityUnSoloUser.get())); // returna el contenido de la caja;
-
     }
+    public User guardar(User user){
+        UserEntity userEntity = this.userMapper.convertirUserAUserEntity(user);
+        return this.userMapper.convertirUserEntityAUser(this.userCrudRepository.save(userEntity));
+    }
+
 }

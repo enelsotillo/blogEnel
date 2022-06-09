@@ -12,6 +12,15 @@ public class BlogEntity {
     private String titulo;
     private String contenido;
     private String autor;
+    private String categoria;
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     public Integer getBlogId() {
         return blogId;

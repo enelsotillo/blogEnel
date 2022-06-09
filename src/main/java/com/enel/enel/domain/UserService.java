@@ -12,4 +12,8 @@ public class UserService {
         return this.userRepository.buscarUserPorId(id);
 
     }
+    //guardar en repository
+    public User guardarUser(User user){
+        return this.userRepository.guardar(user);
+    }
 }
