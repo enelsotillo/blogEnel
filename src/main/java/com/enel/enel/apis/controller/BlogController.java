@@ -26,10 +26,25 @@ public class BlogController {
         }
         return new ResponseEntity<>(blog.get(), HttpStatus.OK);
     }
+    // revisar este controller con la cantidad
     @GetMapping("/all")
-    public ResponseEntity<List<Blog>> consultarTodo(){
+    public ResponseEntity<List<Blog>> consultarTodo(
+            @RequestParam (name="categoria", defaultValue = "") String categoria,
+            @RequestParam (name="cantidad", defaultValue = "0") int cantidad
+
+    ) {
+        List<Blog> lista;
+        if(categoria.length()>0){
+             lista=this.blogService.todosLosBlogPorCategoria(categoria);
+            return new ResponseEntity<List<Blog>>(lista, HttpStatus.OK);
+        }
+        if(cantidad > 0){
+            lista=this.blogService.cantidadBlog(cantidad);
+            return new ResponseEntity<List<Blog>>(lista, HttpStatus.OK);
+        }
         //consultar todos los blog con blogServicio
-        List<Blog> lista=this.blogService.todosBlog();
+        lista=this.blogService.todosBlog();
+        System.out.println(lista.size());
         // retornar la lista de blog
         return new ResponseEntity<List<Blog>>(lista, HttpStatus.OK);
     }

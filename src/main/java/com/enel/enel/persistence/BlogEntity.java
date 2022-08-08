@@ -3,12 +3,13 @@ package com.enel.enel.persistence;
 import javax.persistence.*;
 
 @Entity //indica entidad representa una tabla de datos
-@Table(name = "Blog") // nombre de la base de datos
+@Table(name = "Blog") // nombre de la base de datos o tabla
 public class BlogEntity {
     @Id //representa la llave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blog_id")
     private Integer blogId;
+
     private String titulo;
     private String contenido;
     private String autor;
