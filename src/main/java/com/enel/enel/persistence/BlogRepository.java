@@ -75,4 +75,9 @@ public class BlogRepository {
         listaEntity = (List<BlogEntity>) this.blogCrudRepository.findByCantidadOrderByBlogIdDescByLimit(cantidad);
         return this.blogMapper.convertirAListaBlog(listaEntity);
     }
+    public  List<Blog> OptenrPublicacionHome(int home){
+        List<BlogEntity> listaEntity;
+        listaEntity = (List<BlogEntity>) this.blogCrudRepository.findByHomeOrderByBlogIdDescByLimit(home);
+        return  this.blogMapper.convertirAListaBlog(listaEntity);
+    }
 }

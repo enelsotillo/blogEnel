@@ -10,9 +10,14 @@ public interface BlogCrudRepository extends CrudRepository<BlogEntity, Integer> 
     List<BlogEntity> findByCategoria(String categoria);
     //@Query(value = "SELECT * FROM blog WHERE categoria = ? ORDER BY blog_id DESC", nativeQuery = true)
     List<BlogEntity> findByCategoriaOrderByBlogIdDesc(String categoria);
-    // consulta que ordena Descendete y por limite de 4 registros
 
+    // consulta que ordena Descendete y por limite de 4 registros
     @Query(value = "SELECT * FROM blog ORDER BY blog_id DESC LIMIT ?", nativeQuery = true)
    List<BlogEntity> findByCantidadOrderByBlogIdDescByLimit(int cantidad);
+
+    // consulta que ordena por home sección 3 post
+    @Query(value = "SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1, ?", nativeQuery = true)
+    List<BlogEntity> findByHomeOrderByBlogIdDescByLimit(int home);
+
 
 }

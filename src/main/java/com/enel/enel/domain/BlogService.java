@@ -39,5 +39,9 @@ public List<Blog> todosLosBlogPorCategoria(String categoria){
     public List<Blog> cantidadBlog(int cantidad){
         return this.blogRepository.OptenerPublicacionHomeBlog(cantidad);
     }
+    // nuevo seccion blog Home
+    public List <Blog> SeccionHome(int home){
+        return this.blogRepository.OptenrPublicacionHome(home);
+    }
 
 }

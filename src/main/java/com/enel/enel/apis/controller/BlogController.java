@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+//@CrossOrigin(origins="*") // acceso desde cualquier lugar
 @CrossOrigin(origins="http://localhost:3000") // permiso. el unico que puede hacer peticiones el fromend
 @RestController // el tipo de peticion controlador
 @RequestMapping("/blog") // ruta de acceso
@@ -30,8 +30,8 @@ public class BlogController {
     @GetMapping("/all")
     public ResponseEntity<List<Blog>> consultarTodo(
             @RequestParam (name="categoria", defaultValue = "") String categoria,
-            @RequestParam (name="cantidad", defaultValue = "0") int cantidad
-
+            @RequestParam (name="cantidad", defaultValue = "0") int cantidad,
+            @RequestParam (name="home", defaultValue = "0") int home
     ) {
         List<Blog> lista;
         if(categoria.length()>0){
@@ -40,6 +40,10 @@ public class BlogController {
         }
         if(cantidad > 0){
             lista=this.blogService.cantidadBlog(cantidad);
+            return new ResponseEntity<List<Blog>>(lista, HttpStatus.OK);
+        }
+        if(home > 0){
+            lista=this.blogService.SeccionHome(home);
             return new ResponseEntity<List<Blog>>(lista, HttpStatus.OK);
         }
         //consultar todos los blog con blogServicio
